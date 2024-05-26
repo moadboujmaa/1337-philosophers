@@ -6,23 +6,39 @@
 /*   By: mboujama <mboujama@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 12:29:43 by mboujama          #+#    #+#             */
-/*   Updated: 2024/05/21 12:58:11 by mboujama         ###   ########.fr       */
+/*   Updated: 2024/05/26 14:34:24 by mboujama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philo.h"
 
-int	current_time(void)
+long	current_time(void)
 {
 	struct timeval	tv;
+	long			time;
 
 	gettimeofday(&tv, NULL);
-	printf("%ld, %d\n", tv.tv_sec, tv.tv_usec);
-	return (0);
+	time = tv.tv_sec * 1000L + tv.tv_usec / 1000;
+	return (time);
+}
+
+static long	current_time_mic(void)
+{
+	struct timeval	tv;
+	long			time;
+
+	gettimeofday(&tv, NULL);
+	time = tv.tv_sec * 1000000LL + tv.tv_usec;
+	return (time);
 }
 
 void	ft_usleep(int msec)
 {
-	(void) msec;
-	current_time();
+	long	cur_time;
+	long	time2wait;
+
+	cur_time = current_time_mic();
+	time2wait = cur_time + msec;
+	while (cur_time < time2wait)
+		cur_time = current_time_mic();
 }

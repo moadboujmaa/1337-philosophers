@@ -6,35 +6,44 @@
 /*   By: mboujama <mboujama@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 10:37:59 by mboujama          #+#    #+#             */
-/*   Updated: 2024/05/21 12:51:54 by mboujama         ###   ########.fr       */
+/*   Updated: 2024/05/26 15:47:32 by mboujama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philo.h"
 
-int	eating(t_philo philo)
+int	eating(t_data *data, int philo_id)
 {
-	printf("{time} %d is eating\n", philo.id);
-	// ft_usleep
+	long	time;
+
+	time = data->program_start - current_time();
+	printf("{%ld} %d is eating\n", philo_id);
+	ft_usleep(data->time2eat);
 	return (0);
 }
 
-int	thinking(t_philo philo)
+int	thinking(t_data *data, int philo_id)
 {
-	printf("{time} %d is thinking\n", philo.id);
-	// ft_usleep
+	long	time;
+
+	time = data->program_start - current_time();
+	printf("{%ld} %d is thinking\n", philo_id);
+	// ft_usleep(data->time2);
 	return (0);
 }
 
-int	sleeping(t_philo philo)
+int	sleeping(t_data *data, int philo_id)
 {
-	printf("{time} %d is sleeping\n", philo.id);
-	// ft_usleep
+	long	time;
+
+	time = data->program_start - current_time();
+	printf("{%ld} %d is sleeping\n", philo_id);
+	ft_usleep(data->time2sleep);
 	return (0);
 }
 
-int	died(t_philo philo)
+int	died(t_data *data, int philo_id)
 {
-	printf("{time} %d is died\n", philo.id);
+	printf("{%ld} %d is died\n", philo_id);
 	return (0);
 }

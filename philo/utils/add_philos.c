@@ -6,18 +6,17 @@
 /*   By: mboujama <mboujama@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/19 12:02:53 by mboujama          #+#    #+#             */
-/*   Updated: 2024/05/21 12:57:32 by mboujama         ###   ########.fr       */
+/*   Updated: 2024/05/26 14:35:54 by mboujama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philo.h"
 
-void	*routine(void *param)
+static void	*routine(void *param)
 {
 	int	x;
 
 	x = *(int *) param;
-	ft_usleep(15200);
 	return (0);
 }
 
@@ -27,6 +26,7 @@ int	add_philos(t_data *data)
 	int		i;
 
 	i = -1;
+	data->program_start = current_time();
 	while (++i < data->number_philos)
 	{
 		philo.id = i;
