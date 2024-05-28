@@ -6,19 +6,11 @@
 /*   By: mboujama <mboujama@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/19 12:02:53 by mboujama          #+#    #+#             */
-/*   Updated: 2024/05/26 14:35:54 by mboujama         ###   ########.fr       */
+/*   Updated: 2024/05/28 10:59:13 by mboujama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philo.h"
-
-static void	*routine(void *param)
-{
-	int	x;
-
-	x = *(int *) param;
-	return (0);
-}
 
 int	add_philos(t_data *data)
 {
@@ -30,8 +22,21 @@ int	add_philos(t_data *data)
 	while (++i < data->number_philos)
 	{
 		philo.id = i;
-		pthread_create(&philo.thread, NULL, &routine, &(philo.id));
-		pthread_join(philo.thread, NULL);
+		philo.data = data;
+		philo.is_dead = 0;
+		philo.eat_nb = 0;
+		philo.last_time_eat = data->program_start;
+		data->philos[i] = philo;
+		data->philos[i].r_fork
+			= (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t));
+	}
+	i = -1;
+	while (++i < data->number_philos)
+	{
+		if (i == data->number_philos - 1)
+			data->philos[i].l_fork = data->philos[0].r_fork;
+		else
+			data->philos[i].l_fork = data->philos[i + 1].r_fork;
 	}
 	return (1);
 }

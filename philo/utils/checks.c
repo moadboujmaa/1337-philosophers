@@ -1,34 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo.c                                            :+:      :+:    :+:   */
+/*   checks.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mboujama <mboujama@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/13 14:04:11 by mboujama          #+#    #+#             */
-/*   Updated: 2024/05/28 15:33:58 by mboujama         ###   ########.fr       */
+/*   Created: 2024/05/28 12:58:37 by mboujama          #+#    #+#             */
+/*   Updated: 2024/05/28 13:03:39 by mboujama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "../philo.h"
 
-// void	watcher(t_data *data)
-// {
-// 	(void) data;
-// 	while (1)
-// 	{
-// 		printf("moadmoadmoadmoadmoadmoadmoadmoadmoadmoadmoadmoadmoadmoadmoadmoadmoadmoadmoadmoadmoadmoad\n");
-// 	}
-// }
-
-int	main(int argc, char **argv)
+int	check_death(t_data *data)
 {
-	t_data	data;
+	int	i;
 
-	if (!init_data(&data, argv, argc))
-		return (1);
-	add_philos(&data);
-	create_threads(&data);
-	watcher(&data);
+	i = -1;
+	while (++i < data->number_philos)
+	{
+		if (current_time() - data->philos[i].last_time_eat >= data->time2die)
+			return (1);
+	}
 	return (0);
 }

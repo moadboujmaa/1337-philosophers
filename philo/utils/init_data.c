@@ -6,7 +6,7 @@
 /*   By: mboujama <mboujama@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 11:45:07 by mboujama          #+#    #+#             */
-/*   Updated: 2024/05/18 19:02:07 by mboujama         ###   ########.fr       */
+/*   Updated: 2024/05/27 15:38:47 by mboujama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ int	init_data(t_data *dt, char **argv, int argc)
 	dt->time2sleep = ft_atoi(argv[4]);
 	if (argc == 6)
 		dt->eat_nb = ft_atoi(argv[5]);
-	if (dt->number_philos < 1 || dt->number_philos > 200 || dt->time2die < 0
-		|| dt->time2eat < 0 || dt->time2sleep < 0)
+	if (dt->number_philos < 1 || dt->number_philos > 200 || dt->time2die < 60
+		|| dt->time2eat < 60 || dt->time2sleep < 60)
 		return (0);
 	if (argc == 6 && dt->eat_nb <= 0)
 		return (0);
