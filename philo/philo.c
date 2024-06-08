@@ -6,20 +6,11 @@
 /*   By: mboujama <mboujama@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 14:04:11 by mboujama          #+#    #+#             */
-/*   Updated: 2024/05/28 15:33:58 by mboujama         ###   ########.fr       */
+/*   Updated: 2024/06/08 12:20:08 by mboujama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
-// void	watcher(t_data *data)
-// {
-// 	(void) data;
-// 	while (1)
-// 	{
-// 		printf("moadmoadmoadmoadmoadmoadmoadmoadmoadmoadmoadmoadmoadmoadmoadmoadmoadmoadmoadmoadmoadmoad\n");
-// 	}
-// }
 
 int	main(int argc, char **argv)
 {
@@ -29,6 +20,5 @@ int	main(int argc, char **argv)
 		return (1);
 	add_philos(&data);
 	create_threads(&data);
-	watcher(&data);
 	return (0);
 }

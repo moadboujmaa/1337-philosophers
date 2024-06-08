@@ -6,7 +6,7 @@
 /*   By: mboujama <mboujama@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 14:05:19 by mboujama          #+#    #+#             */
-/*   Updated: 2024/05/27 16:29:08 by mboujama         ###   ########.fr       */
+/*   Updated: 2024/06/08 12:04:43 by mboujama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ typedef struct s_data
 	int				eat_nb;
 	long long		program_start;
 	pthread_mutex_t	*forks;
-	pthread_mutex_t	print;
+	pthread_mutex_t	*print;
 	t_philo			philos[200];
 }	t_data;
 
