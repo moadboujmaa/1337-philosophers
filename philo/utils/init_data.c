@@ -6,7 +6,7 @@
 /*   By: mboujama <mboujama@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 11:45:07 by mboujama          #+#    #+#             */
-/*   Updated: 2024/06/10 12:54:36 by mboujama         ###   ########.fr       */
+/*   Updated: 2024/06/11 16:08:13 by mboujama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ int	init_data(t_data *dt, char **argv, int argc)
 	dt->time2die = ft_atoi(argv[2]);
 	dt->time2eat = ft_atoi(argv[3]);
 	dt->time2sleep = ft_atoi(argv[4]);
+	dt->program_start = current_time();
 	dt->print = (pthread_mutex_t *) malloc(sizeof(pthread_mutex_t));
 	if (argc == 6)
 		dt->eat_nb = ft_atoi(argv[5]);

@@ -6,7 +6,7 @@
 /*   By: mboujama <mboujama@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 12:58:37 by mboujama          #+#    #+#             */
-/*   Updated: 2024/05/28 13:03:39 by mboujama         ###   ########.fr       */
+/*   Updated: 2024/06/19 11:04:02 by mboujama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,23 @@ int	check_death(t_data *data)
 		if (current_time() - data->philos[i].last_time_eat >= data->time2die)
 			return (1);
 	}
+	return (0);
+}
+
+int	all_eat(t_data *data)
+{
+	int	i;
+	int	counter;
+
+	i = 0;
+	counter = 0;
+	while (i < data->number_philos)
+	{
+		if (data->philos[i].eat_nb >= data->time2eat)
+			counter++;
+		i++;
+	}
+	if (counter == data->number_philos)
+		return (1);
 	return (0);
 }

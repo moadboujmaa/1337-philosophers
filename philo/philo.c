@@ -6,7 +6,7 @@
 /*   By: mboujama <mboujama@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 14:04:11 by mboujama          #+#    #+#             */
-/*   Updated: 2024/06/08 12:20:08 by mboujama         ###   ########.fr       */
+/*   Updated: 2024/06/19 10:56:50 by mboujama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,5 +20,6 @@ int	main(int argc, char **argv)
 		return (1);
 	add_philos(&data);
 	create_threads(&data);
+	clear_program(&data);
 	return (0);
 }
