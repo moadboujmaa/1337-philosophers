@@ -22,7 +22,7 @@ long long	current_time(void)
 	return (time);
 }
 
-void	ft_sleep(int msec)
+void	ft_sleep(int msec, t_data *data)
 {
 	long long	cur_time;
 	long long	time2wait;
@@ -31,7 +31,9 @@ void	ft_sleep(int msec)
 	time2wait = cur_time + msec;
 	while (cur_time < time2wait)
 	{
-		usleep(100);
 		cur_time = current_time();
+		if (dead_method(data, 'g', 0))
+			break;
+		usleep(50);
 	}
 }

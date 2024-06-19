@@ -6,7 +6,7 @@
 /*   By: mboujama <mboujama@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/19 12:02:53 by mboujama          #+#    #+#             */
-/*   Updated: 2024/06/16 11:20:06 by mboujama         ###   ########.fr       */
+/*   Updated: 2024/06/19 11:58:29 by mboujama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int	add_philos(t_data *data)
 	{
 		philo.id = i + 1;
 		philo.data = data;
+		pthread_mutex_init(&philo.last_eat_mutex, NULL);
 		philo.eat_nb = 0;
 		philo.r_fork = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t));
 		philo.last_time_eat = current_time();

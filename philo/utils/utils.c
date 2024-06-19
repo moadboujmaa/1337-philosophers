@@ -6,11 +6,25 @@
 /*   By: mboujama <mboujama@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 12:35:47 by mboujama          #+#    #+#             */
-/*   Updated: 2024/06/19 11:04:06 by mboujama         ###   ########.fr       */
+/*   Updated: 2024/06/19 12:21:18 by mboujama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philo.h"
+
+void	init_mutexes(t_data *data)
+{
+	int	i;
+
+	i = 0;
+	pthread_mutex_init(data->print, NULL);
+	pthread_mutex_init(&(data->dead), NULL);
+	while (i < data->number_philos)
+	{
+		pthread_mutex_init(data->philos[i].r_fork, NULL);
+		i++;
+	}
+}
 
 void	clear_program(t_data *data)
 {
@@ -22,22 +36,22 @@ void	clear_program(t_data *data)
 	while (i < data->number_philos)
 	{
 		pthread_mutex_destroy(data->philos[i].r_fork);
+		pthread_mutex_destroy(&(data->philos[i].last_eat_mutex));
 		free(data->philos[i].r_fork);
 		i++;
 	}
 }
 
-void	init_mutexes(t_data *data)
+int	dead_method(t_data *data, char a, int new_val)
 {
-	int	i;
+	int tmp;
 
-	i = 0;
-	pthread_mutex_init(data->print, NULL);
-	while (i < data->number_philos)
-	{
-		pthread_mutex_init(data->philos[i].r_fork, NULL);
-		i++;
-	}
+	pthread_mutex_lock(&data->dead);
+	if (a == 's')
+		data->is_dead = new_val;
+	tmp = data->is_dead;
+	pthread_mutex_unlock(&data->dead);
+	return (tmp);
 }
 
 int	ft_atoi(const char *str)
