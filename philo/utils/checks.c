@@ -6,7 +6,7 @@
 /*   By: mboujama <mboujama@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 12:58:37 by mboujama          #+#    #+#             */
-/*   Updated: 2024/06/19 12:02:28 by mboujama         ###   ########.fr       */
+/*   Updated: 2024/06/20 11:32:40 by mboujama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	all_eat(t_data *data)
 	counter = 0;
 	while (i < data->number_philos)
 	{
-		if (data->philos[i].eat_nb >= data->time2eat)
+		if (data->philos[i].eat_nb >= data->eat_nb)
 			counter++;
 		i++;
 	}

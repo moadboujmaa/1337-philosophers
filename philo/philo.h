@@ -6,7 +6,7 @@
 /*   By: mboujama <mboujama@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 14:05:19 by mboujama          #+#    #+#             */
-/*   Updated: 2024/06/19 12:31:28 by mboujama         ###   ########.fr       */
+/*   Updated: 2024/06/20 11:36:29 by mboujama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ typedef struct s_data
 	int				time2sleep;
 	int				eat_nb;
 	int				dead_id;
+	int				should_count;
 	long long		program_start;
 	pthread_mutex_t	*print;
 	pthread_mutex_t	dead;
@@ -64,6 +65,7 @@ long long	current_time(void);
 void		create_threads(t_data *data);
 void		clear_program(t_data *data);
 void		init_mutexes(t_data *data);
-int			dead_method(t_data *data, char a, int new_val);
+int			stop_method(t_data *data, char a, int new_val);
+int			all_eat(t_data *data);
 
 #endif

@@ -32,8 +32,8 @@ void	ft_sleep(int msec, t_data *data)
 	while (cur_time < time2wait)
 	{
 		cur_time = current_time();
-		if (dead_method(data, 'g', 0))
-			break;
+		if (stop_method(data, 'g', 0))
+			break ;
 		usleep(50);
 	}
 }

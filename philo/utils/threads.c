@@ -6,7 +6,7 @@
 /*   By: mboujama <mboujama@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 16:11:12 by mboujama          #+#    #+#             */
-/*   Updated: 2024/06/19 12:55:16 by mboujama         ###   ########.fr       */
+/*   Updated: 2024/06/20 11:36:29 by mboujama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void	*routine(void *param)
 	philo = (t_philo *) param;
 	if (philo->id % 2 == 0)
 		sleeping(philo->data, philo->id);
-	while (!dead_method(philo->data, 'g', 0))
+	while (!stop_method(philo->data, 'g', 0))
 	{
 		thinking(philo->data, philo->id);
 		eating(philo->data, philo->id);
@@ -35,11 +35,16 @@ static int	watcher(t_data *data)
 	i = 0;
 	while (i < data->number_philos)
 	{
-		if (check_death(data, i) && !dead_method(data, 'g', 0))
+		if (data->should_count && all_eat(data))
 		{
-			dead_method(data, 's', 1);
+			stop_method(data, 's', 1);
+			break ;
+		}
+		if (check_death(data, i) && !stop_method(data, 'g', 0))
+		{
+			stop_method(data, 's', 1);
 			died(data, i + 1);
-			return (1);
+			break ;
 		}
 		usleep(300);
 		i++;

@@ -6,7 +6,7 @@
 /*   By: mboujama <mboujama@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 12:35:47 by mboujama          #+#    #+#             */
-/*   Updated: 2024/06/19 12:21:18 by mboujama         ###   ########.fr       */
+/*   Updated: 2024/06/20 12:00:44 by mboujama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,19 +32,20 @@ void	clear_program(t_data *data)
 
 	i = 0;
 	pthread_mutex_destroy(data->print);
+	pthread_mutex_destroy(&(data->dead));
 	free(data->print);
 	while (i < data->number_philos)
 	{
 		pthread_mutex_destroy(data->philos[i].r_fork);
-		pthread_mutex_destroy(&(data->philos[i].last_eat_mutex));
 		free(data->philos[i].r_fork);
+		pthread_mutex_destroy(&(data->philos[i].last_eat_mutex));
 		i++;
 	}
 }
 
-int	dead_method(t_data *data, char a, int new_val)
+int	stop_method(t_data *data, char a, int new_val)
 {
-	int tmp;
+	int	tmp;
 
 	pthread_mutex_lock(&data->dead);
 	if (a == 's')
