@@ -12,10 +12,10 @@
 
 #include "../philo.h"
 
-long long	current_time(void)
+size_t	current_time(void)
 {
 	struct timeval	tv;
-	long			time;
+	size_t			time;
 
 	gettimeofday(&tv, NULL);
 	time = tv.tv_sec * 1000 + tv.tv_usec / 1000;
@@ -24,8 +24,8 @@ long long	current_time(void)
 
 void	ft_sleep(int msec, t_data *data)
 {
-	long long	cur_time;
-	long long	time2wait;
+	size_t	cur_time;
+	size_t	time2wait;
 
 	cur_time = current_time();
 	time2wait = cur_time + msec;
@@ -34,6 +34,6 @@ void	ft_sleep(int msec, t_data *data)
 		cur_time = current_time();
 		if (stop_method(data, 'g', 0))
 			break ;
-		usleep(50);
+		usleep(200);
 	}
 }

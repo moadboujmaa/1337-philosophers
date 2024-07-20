@@ -6,7 +6,7 @@
 /*   By: mboujama <mboujama@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 10:37:59 by mboujama          #+#    #+#             */
-/*   Updated: 2024/06/20 11:45:33 by mboujama         ###   ########.fr       */
+/*   Updated: 2024/07/20 10:42:45 by mboujama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	eating(t_data *data, int philo_id)
 		ft_sleep(data->time2eat, data);
 		pthread_mutex_unlock(data->philos[philo_id - 1].r_fork);
 		pthread_mutex_unlock(data->philos[philo_id - 1].l_fork);
-		data->philos[philo_id - 1].eat_nb++;
+		nb_eat(&(data->philos[philo_id - 1]), 's');
 	}
 	return (0);
 }

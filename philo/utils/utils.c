@@ -6,7 +6,7 @@
 /*   By: mboujama <mboujama@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 12:35:47 by mboujama          #+#    #+#             */
-/*   Updated: 2024/06/20 12:00:44 by mboujama         ###   ########.fr       */
+/*   Updated: 2024/07/20 10:39:21 by mboujama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	init_mutexes(t_data *data)
 	while (i < data->number_philos)
 	{
 		pthread_mutex_init(data->philos[i].r_fork, NULL);
+		pthread_mutex_init(&(data->philos[i].nb_eat_mutex), NULL);
 		i++;
 	}
 }
@@ -39,20 +40,9 @@ void	clear_program(t_data *data)
 		pthread_mutex_destroy(data->philos[i].r_fork);
 		free(data->philos[i].r_fork);
 		pthread_mutex_destroy(&(data->philos[i].last_eat_mutex));
+		pthread_mutex_destroy(&(data->philos[i].nb_eat_mutex));
 		i++;
 	}
-}
-
-int	stop_method(t_data *data, char a, int new_val)
-{
-	int	tmp;
-
-	pthread_mutex_lock(&data->dead);
-	if (a == 's')
-		data->is_dead = new_val;
-	tmp = data->is_dead;
-	pthread_mutex_unlock(&data->dead);
-	return (tmp);
 }
 
 int	ft_atoi(const char *str)

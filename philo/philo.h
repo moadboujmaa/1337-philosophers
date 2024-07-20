@@ -6,7 +6,7 @@
 /*   By: mboujama <mboujama@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 14:05:19 by mboujama          #+#    #+#             */
-/*   Updated: 2024/06/20 11:36:29 by mboujama         ###   ########.fr       */
+/*   Updated: 2024/07/20 11:52:31 by mboujama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,14 @@ typedef struct s_philo
 	pthread_mutex_t	*r_fork;
 	pthread_mutex_t	*l_fork;
 	pthread_mutex_t	last_eat_mutex;
+	pthread_mutex_t	nb_eat_mutex;
 	t_data			*data;
 }	t_philo;
 
 typedef struct s_data
 {
 	int				number_philos;
-	int				time2die;
+	size_t			time2die;
 	int				is_dead;
 	int				time2eat;
 	int				time2sleep;
@@ -61,11 +62,12 @@ void		ft_bzero(void *s, size_t n);
 int			add_philos(t_data *data);
 int			check_death(t_data *data, int index);
 void		ft_sleep(int msec, t_data *data);
-long long	current_time(void);
+size_t		current_time(void);
 void		create_threads(t_data *data);
 void		clear_program(t_data *data);
 void		init_mutexes(t_data *data);
 int			stop_method(t_data *data, char a, int new_val);
 int			all_eat(t_data *data);
+int			nb_eat(t_philo *philo, char a);
 
 #endif

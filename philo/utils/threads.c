@@ -6,7 +6,7 @@
 /*   By: mboujama <mboujama@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 16:11:12 by mboujama          #+#    #+#             */
-/*   Updated: 2024/06/20 11:36:29 by mboujama         ###   ########.fr       */
+/*   Updated: 2024/07/20 11:55:53 by mboujama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void	*routine(void *param)
 		eating(philo->data, philo->id);
 		sleeping(philo->data, philo->id);
 	}
-	return (0);
+	return (NULL);
 }
 
 static int	watcher(t_data *data)
@@ -46,7 +46,6 @@ static int	watcher(t_data *data)
 			died(data, i + 1);
 			break ;
 		}
-		usleep(300);
 		i++;
 		if (i == data->number_philos)
 			i = 0;
@@ -54,17 +53,46 @@ static int	watcher(t_data *data)
 	return (0);
 }
 
+static void	*one_routine(void *param)
+{
+	t_data	*data;
+
+	data = (t_data *) param;
+
+	printf("%lld 1 has taken a fork\n", current_time() - data->program_start);
+	ft_sleep(data->time2die, data);
+	printf("%lld 1 died\n", current_time() - data->program_start);
+	return (NULL);
+}
+
+static int	one_philo(t_data *data)
+{
+	pthread_t	thread;
+
+	pthread_create(&thread, NULL, &one_routine, data);
+	pthread_join(thread, NULL);
+	return (0);
+}
+
 void	create_threads(t_data *data)
 {
 	int	i;
 
-	init_mutexes(data);
-	i = -1;
-	while (++i < data->number_philos)
-		pthread_create(&data->philos[i].thread, NULL,
-			&routine, &(data)->philos[i]);
-	i = -1;
-	watcher(data);
-	while (++i < data->number_philos)
-		pthread_join(data->philos[i].thread, NULL);
+	if (data->number_philos == 1)
+	{
+		one_philo(data);
+		return ;
+	}
+	else
+	{
+		init_mutexes(data);
+		i = -1;
+		while (++i < data->number_philos)
+			pthread_create(&data->philos[i].thread, NULL,
+				&routine, &(data)->philos[i]);
+		i = -1;
+		watcher(data);
+		while (++i < data->number_philos)
+			pthread_join(data->philos[i].thread, NULL);
+	}
 }
